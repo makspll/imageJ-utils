@@ -48,6 +48,7 @@ jobs:
         uses: ncipollo/release-action@v1
         if: steps.checkTag.outputs.exists == 'false' && github.ref == 'refs/heads/main'
         with:
+          tag: v${{ steps.release-version.outputs.version }}
           artifacts: "*.jar"
           body: |
             # Release ${{ steps.release-version.outputs.version }}
