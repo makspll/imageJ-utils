@@ -53,8 +53,8 @@ jobs:
           generateReleaseNotes: true
           makeLatest: true
           body: |
-            # Release - ${{ steps.release-version.outputs.version }}
             ## Installation Instructions
               - Download the file named `imagej-utils-${{ steps.release-version.outputs.version}}.jar` from the artifacts list below this notice.
               - Place the file in your `plugins` folder located in your ImageJ installation directory.
+              - Remove older versions of the plugin if present in the `plugins` folder
               - Restart ImageJ if it is running.
