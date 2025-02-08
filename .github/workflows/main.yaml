@@ -1,0 +1,57 @@
+name: Build And Release
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - "**"
+
+jobs:
+  build:
+    permissions:
+      contents: write
+      
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v2
+      with:
+        java-version: 1.8
+
+    - name: Get version from .pom file
+      id: release-version
+      run: |
+        VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+        echo "Release version is $VERSION"
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: Build jar
+      run: | 
+        mvn package
+        mv target/*.jar .
+    
+    - name: Check tag exists
+    - uses: uruz-7/tag-exists-action@v2
+      id: checkTag
+      with:
+        tag: v${{ steps.release-version.outputs.version }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Create release if it doesn't - main
+      if: steps.checkTag.outputs.tag_exists == 'false' && github.ref == 'refs/heads/main'
+      uses: softprops/action-gh-release@v2
+
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "*.jar"
+        body: |
+          # Release ${{ steps.release-version.outputs.version }}
+
+          To install, simply download the jar file and drop it into your imagej plugins folder.

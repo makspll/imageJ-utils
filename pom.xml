@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>makspll</groupId>
+	<artifactId>imagej-utils</artifactId>
+	<version>0.0.1</version>
+	<packaging>jar</packaging>
+
+	<name>ImageJ Plugin - ImageJ Utils by Makspll</name>
+	<description>General utilities built for those needing them</description>
+	<url>https://github.com/makspll/imageJ-utils</url>
+	<properties>
+		<jar.finalName>imagej_utils-${version}</jar.finalName>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>gov.nih.imagej</groupId>
+			<artifactId>imagej</artifactId>
+			<version>1.47</version>
+			<type>jar</type>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
