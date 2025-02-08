@@ -21,7 +21,8 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v2
         with:
-          java-version: 1.8
+          java-version: 8
+          distribution: adopt
   
       - name: Get version from .pom file
         id: release-version
