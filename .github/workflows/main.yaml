@@ -46,7 +46,7 @@ jobs:
   
       - name: Create Release (main)
         uses: ncipollo/release-action@v1
-        if: steps.checkTag.outputs.tag_exists == 'false' && github.ref == 'refs/heads/main'
+        if: steps.checkTag.outputs.exists == 'false' && github.ref == 'refs/heads/main'
         with:
           artifacts: "*.jar"
           body: |
