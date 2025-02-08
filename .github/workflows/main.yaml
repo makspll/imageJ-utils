@@ -36,7 +36,7 @@ jobs:
           mv target/*.jar .
       
       - name: Check tag exists
-      - uses: uruz-7/tag-exists-action@v2
+        uses: uruz-7/tag-exists-action@v2
         id: checkTag
         with:
           tag: v${{ steps.release-version.outputs.version }}
