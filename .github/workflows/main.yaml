@@ -16,10 +16,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Set up JDK 1.8
+    - name: Set up Java
       uses: actions/setup-java@v2
       with:
         java-version: 1.8
@@ -44,11 +43,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Create release if it doesn't - main
+    - name: Create Release (main)
+      uses: ncipollo/release-action@v1
       if: steps.checkTag.outputs.tag_exists == 'false' && github.ref == 'refs/heads/main'
-      uses: softprops/action-gh-release@v2
-
-    - uses: ncipollo/release-action@v1
       with:
         artifacts: "*.jar"
         body: |
